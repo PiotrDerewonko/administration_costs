@@ -1,0 +1,29 @@
+from django.contrib import auth
+from django.db import models
+
+class MeterLocation(models.Model):
+    name = models.CharField(help_text='Nazwa kontrahenta', max_length=250)
+    def __str__(self):
+        return f"{self.name}"
+
+class ElectricityMeter(models.Model):
+    name = models.CharField(help_text='Nazwa licznika', max_length=250)
+    meter_location = models.ForeignKey(MeterLocation, on_delete=models.PROTECT)
+
+class MeterConections(models.Model):
+    master_meter = models.ForeignKey(ElectricityMeter, on_delete=models.PROTECT, help_text="Licznik nadrzędy", related_name='nadlicznik')
+    sub_meter = models.ForeignKey(ElectricityMeter, on_delete=models.PROTECT, help_text='Licznik podrzędny', related_name='podlicznik')
+
+class ShareInMeter(models.Model):
+    meter = models.ForeignKey(ElectricityMeter, on_delete=models.PROTECT, help_text='Nazwa licznika')
+    cob_share = models.BooleanField(default=False)
+    cob_share_percent = models.FloatField(default=0)
+    museum_share = models.BooleanField(default=False)
+    museum_share_percent = models.FloatField(default=0)
+    pantheon_share = models.BooleanField(default=False)
+    pantheon_share_percent = models.FloatField(default=0)
+    institute_share = models.BooleanField(default=False)
+    institute_share_percent = models.FloatField(default=0)
+    outside_share = models.BooleanField(default=False)
+    outside_share_percent = models.FloatField(default=0)
+
