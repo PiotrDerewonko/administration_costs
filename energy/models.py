@@ -47,6 +47,29 @@ class MeterReadings(models.Model):
     year = models.IntegerField()
     month = models.IntegerField()
     meterreading = models.FloatField()
+    costperkwh = models.FloatField()
+
+class InvoicesCostType(models.Model):
+    type = models.CharField(max_length=250, help_text='Rodzaj faktury')
+
+    def __str__(self):
+        return self.type
+
+class InvoicesCostStatus(models.Model):
+    type = models.CharField(max_length=250, help_text='Status faktury')
+
+    def __str__(self):
+        return self.type
+
+class InvoicesCost(models.Model):
+    invoice_number = models.CharField(max_length=250, help_text='Numer faktury')
+    invoice_date = models.DateField()
+    invoice_value = models.FloatField()
+    invoice_type = models.ForeignKey(InvoicesCostType, on_delete=models.PROTECT, help_text='Rodzaj faktury')
+    invoice_year_refers_to = models.IntegerField()
+    invoice_month_refers_to = models.IntegerField()
+    invoice_status = models.ForeignKey(InvoicesCostStatus, on_delete=models.PROTECT, help_text='Status faktury1')
+
 
 
 

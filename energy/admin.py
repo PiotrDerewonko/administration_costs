@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from . models import MeterConections
-from energy.models import MeterConections, MeterLocation, ElectricityMeter, ShareInMeter, DefaulValues, MeterReadings
+from energy.models import MeterConections, MeterLocation, ElectricityMeter, ShareInMeter, DefaulValues, MeterReadings, \
+    InvoicesCostType, InvoicesCost, InvoicesCostStatus
 
 
 class ElectricityMeterAdmin(admin.ModelAdmin):
@@ -48,6 +49,9 @@ class MeterReadingsAdmin(admin.ModelAdmin):
     def wartosc_licznika(self, obj):
         return obj.meterreading
 
+class InvoiceCostAdmin(admin.ModelAdmin):
+    model =  InvoicesCost
+    list_display = ['invoice_number', 'invoice_date', 'invoice_value', 'invoice_type', 'invoice_year_refers_to', 'invoice_month_refers_to']
 
 
 admin.site.register(MeterConections, MeterConectionsAdmin)
@@ -56,3 +60,6 @@ admin.site.register(ElectricityMeter, ElectricityMeterAdmin)
 admin.site.register(ShareInMeter, SherInMeterAdmin)
 admin.site.register(DefaulValues)
 admin.site.register(MeterReadings, MeterReadingsAdmin)
+admin.site.register(InvoicesCostType)
+admin.site.register(InvoicesCost, InvoiceCostAdmin)
+admin.site.register(InvoicesCostStatus)
