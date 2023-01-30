@@ -48,6 +48,7 @@ class MeterReadings(models.Model):
     month = models.IntegerField()
     meterreading = models.FloatField()
     costperkwh = models.FloatField()
+    data_reading = models.DateField()
 
 class InvoicesCostType(models.Model):
     type = models.CharField(max_length=250, help_text='Rodzaj faktury')
