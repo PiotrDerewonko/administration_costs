@@ -69,7 +69,7 @@ class InvoicesCost(models.Model):
     invoice_type = models.ForeignKey(InvoicesCostType, on_delete=models.PROTECT, help_text='Rodzaj faktury')
     invoice_year_refers_to = models.IntegerField()
     invoice_month_refers_to = models.IntegerField()
-    invoice_status = models.ForeignKey(InvoicesCostStatus, on_delete=models.PROTECT, help_text='Status faktury1')
+    invoice_status = models.ForeignKey(InvoicesCostStatus, on_delete=models.PROTECT, help_text='Status faktury')
 
 
 

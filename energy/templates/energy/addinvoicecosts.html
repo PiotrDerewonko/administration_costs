@@ -1,0 +1,22 @@
+{%  extends 'base.html' %}
+<h3>Miejsce na dodanie nowej faktury kosztowej</h3>
+{%  block content %}
+    <center>
+    <table>
+<form method="post">
+    <tr>{%  for field in form %}
+        <td>{{ field.label }}</td>
+    {% endfor %}</tr>
+<center>
+    {%  csrf_token %}
+    {%  for field in form %}
+        <td>{{ field }}</td>
+    {% endfor %}
+
+    </center>
+        <input type="submit" value="Zapisz dane" />
+    </form>
+    </table>
+        </center>
+
+{%  endblock %}

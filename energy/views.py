@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views import View
 from django.shortcuts import render
 from . models import MeterReadings, InvoicesCost
-from . forms import MeterReadingsForm
+from . forms import MeterReadingsForm, InvoicesCostForm
 from . tables import InvoiceTable, MeterReadingTable
 from django_tables2 import RequestConfig
 
@@ -16,9 +16,18 @@ class MeterReadingsFormView(FormView):
         form.save()
         return super().form_valid(form)
 
-class FormSuccessView(View):
-    def get(self, request, *args, **kwargs):
-        return HttpResponse("zapisane")
+
+
+class InvoicesCostFormView(FormView):
+    template_name = 'energy/addinvoicecosts.html'
+    form_class = InvoicesCostForm
+    success_url = '/energy/invoice/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
 
 def InvoiceView(request):
 
