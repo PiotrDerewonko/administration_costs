@@ -1,9 +1,52 @@
 {%  extends 'base.html' %}
 
 {%  block content %}
+    <form method="post">
+
+    {% csrf_token %}
+        <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>Wybór roku</th>
+                    <th>Wybór miesiąca</th>
+                    <th>Stawka za 1 kWh</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>{{ option_form.year_choices }}</th>
+                    <th>{{ option_form.month_choices }}</th>
+                    <th>{{ option_form.cost }}</th>
+                </tr>
+            </tbody>
+        </table>
+            </center>
+    </form>
 <form method="post">
     {%  csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Zapisz dane" />
+ <input type="hidden" name="form-TOTAL_FORMS" value="1">
+  <input type="hidden" name="form-INITIAL_FORMS" value="1">
+<div style="text-align: center">
+       <table border="1">
+    <thead>
+      <tr>
+        <th>Nazwa licznika</th>
+        <th>Wartość licznika <br>
+            na koniec miesiąca</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for form in formset %}
+        <tr>
+          <td>{{ form.name }}</td>
+          <td>{{ form.test }}</td>
+
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit">Save</button>
+</div>
     </form>
 {%  endblock %}
